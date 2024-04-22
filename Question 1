@@ -1,0 +1,49 @@
+# Question 1
+def function1(fitmon_list):
+    # Define N as the length of fitmon_list 
+    N = len(fitmon_list)
+
+    # Create a list to store all the elements of the FITMONS values such as affinity_left, cuteness_score, affinity_right
+    DP_table = []
+
+    # Creating the Dynammic Programming table and initialize the elements within the array to 0
+    for _ in range(N):
+        DP_table.append([0 for _ in range(N)]) # Initializing the Dynammic Programming table
+
+     # Setting base case because to approach the problem using bottom-up approach and the FITMON has it's own individual cuteness scores
+    for i in range(N):
+        DP_table[i][i] = fitmon_list[i][1]
+
+    # Filling the Dynammic Programming table to contain the highest possible cuteness score
+    for l in range(1, N+1): # Iterating through 1 to N to obtain the optimal cuteness score 
+        for i in range(N - l + 1):
+            j = i + l - 1
+            for k in range(i, j):
+
+                # Calculate cuteness score when FUSING two FITMONS
+                cuteness_score = int(DP_table[i][k] * fitmon_list[k][2] + DP_table[k+1][j] * fitmon_list[k+1][0])
+
+                # Storing the final and highest possible cuteness score into the DP_table with position [i][j]
+                DP_table[i][j] = max(DP_table[i][j], cuteness_score)
+
+    # Returning a 2D list that only contains the highest possible cuteness score
+    return DP_table
+
+def fuse(fitmons):
+    # Create a list to only store the result of the cuteness score
+    answer = []
+
+    # Retrieving the Dynammic Programming table that was previously filled in already
+    result = function1(fitmons)
+
+    # Assuming that the final cuteness score is already located in the [0][len(fitmons)-1], it will later on be integrated with the for loop to obtain the final answer using a for loop
+    cuteness_score = result[0][len(fitmons) - 1] # The final cuteness score after FUSING all FITMONS
+    
+    # The for loop will iterate through the list to obtain and output the final cuteness score after FUSING all FITMONS
+    for i in [cuteness_score]:  
+
+        # Adding/appending the cuteness score into the list location i after iterating
+        cuteness_score.append(i)
+
+    # Returning the answer
+    return answer
