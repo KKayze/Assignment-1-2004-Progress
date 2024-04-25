@@ -1,0 +1,130 @@
+# ==========
+# Question 2
+class TreeMap:
+    import heapq
+    """
+    Importing heapq to be able to access and use the min-heap functionality later on in the code
+    """
+
+class Vertex:
+    def __init__(self, Vertex: id):
+        """
+        Written By: Kayla Zevanya (32810806)
+
+        Function Description:
+        The function is to create and initialise a vertex object.
+
+        Approach Description:
+        The approach is to give elements or characteristic to the vertex such as if the vertex has been discovered or if it has been visited.
+
+        Input:
+            Vertex in the form of an id
+        Output:
+            None
+
+        Time Complexity:
+            Best case time complexity: O(1)
+            Best case analysis:
+
+        Space complexity: 
+            Worst case time complexity: O(1)
+            Worst case analysis:
+        """
+        # Unique id for the vertex
+        self.Vertex_id = Vertex
+
+        # List of possible edges connecting to the vertex
+        self.Edges = []
+
+        # A boolean to indicate if the vertex is discovered or not
+        self.discovered = False
+
+        # A boolean to indicate if the vertex is visited or not
+        self.visited = False
+
+        # A vertex that is before the current vertex
+        self.previous = None
+
+class Edge:
+    def __init__(self, current_vertex, next_vertex, weight):
+        """
+        Written By: Kayla Zevanya (32810806)
+
+        Function Description:
+        The function is to create and initialise an edge object.
+
+        Approach Description:
+        The approach is to give elements or characteristic to the edge such as the weight (time) of the edge from current vertex to the next vertex.
+
+        Input:
+            current_vertex: The first input is the current vertex in the form of an id for the current vertex
+            next_vertex: The second input is the next vertex in the form of an id for the next vertex
+            weight: The third input is the weight (or time) of the edge 
+        Output:
+            None
+
+        Time Complexity:
+            Best case time complexity: O(1)
+            Best case analysis:
+
+        Space complexity: 
+            Worst case time complexity: O(1)
+            Worst case analysis:
+        """
+        self.current_vertex = current_vertex
+        self.next_vertex = next_vertex
+        self.weight = weight
+        
+
+
+
+    def __init__(self, roads, solulus):
+        """
+        This init function that create magic
+        Written by l337coderblazeIT
+
+        Precondition:
+        Postcondition:
+
+        Input:
+            roads: bla
+            solulus: bla bla
+        Return:
+            None
+
+        Time complexity: 
+            Best case analysis:
+            Worst case analysis:
+        Space complexity: 
+            Input space analysis:
+            Aux space analysis::
+        """
+        self.something = None
+    
+    def escape(self, start, exits):
+        """
+        This climb function that performs magic
+        Written by l337coderblazeIT
+
+        Precondition:
+        Postcondition:
+
+        Input:
+            start: bla
+            exits: bla bla
+        Return:
+            (total_time, route):
+            total_time: is the answer
+            route: is the answer
+
+        Time complexity: 
+            Best case analysis:
+            Worst case analysis:
+        Space complexity: 
+            Input space analysis:
+            Aux space analysis::
+        """
+        # do something
+        total_time = 0
+        route = []
+        return (total_time, route)
