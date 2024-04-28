@@ -1,0 +1,236 @@
+# ==========
+# Question 2
+class Vertex:
+    def __init__(self):
+        """
+        Written By: Kayla Zevanya (32810806)
+
+        Function Description:
+        The function is to initialize a vertex to represent a tree in the forest. As later on, it is necessary to create a graph and within the graph there is a vertex
+        and an edge, so in this function is to initialize the vertex to contain the Edges (or roads). Each vertex (or tree) will connect to other vertices (or trees) through a directed and weighted (or time) edge
+        to show that there is a path (or road) from one tree to another and eventually reaching the last tree to exit the forest.
+
+        Approach Description:
+        The function will also be explained in more detailed description alongside with the code written by myself including adding an edge within this function as a list to store edges (or roads) that 
+        is pointing out from the current vertex (or trees).
+
+        Input:
+            Self means the function vertex later on when it is called
+        Output:
+            None
+
+        Time Complexity:
+            Best case time complexity: O(1)
+            Best case analysis: The time complexity will be O(1) as the function only contain initialization of attributes for the vertex (or tree).
+
+        Space complexity: 
+            Worst case time complexity: O(1)
+            Worst case analysis: The space complexity will be O(1) as the function only contain initialization of attributes for the vertex (or tree).
+        """
+        # List of possible edges (or roads) connecting to the vertex (or tree)
+        self.edges = []
+
+class Edge:
+    def __init__(self, next_vertex, weight):
+        """
+        Written By: Kayla Zevanya (32810806)
+
+        Function Description:
+        The function is to initialize the edge (or road) to have properties such as to where the edge (or road) connects to the next vertex (or tree). As the assignment specification also mentions that 
+        there is an amount of time needed to travel down the road (or edge) from current tree (or current vertex) to next tree (or next vertex), therefore, the function 
+        also need to initialize the road (or edge) to have travel time (weight).
+
+        Approach Description:
+        The approach is to give elements or characteristic to the edge such as the weight (time) of the edge from current vertex (or current tree) to the next vertex (or next tree). The function 
+        will also be explained in more detailed description alongside with the code writtren by myself.
+
+        Input:
+            current_vertex: The first input is the current vertex in the form of an id (or identifier) for the current vertex (or current tree)
+            next_vertex: The second input is the next vertex in the form of an id (or identifier) for the next vertex (or next tree)
+            weight: The third input is the weight (or travel time) of the edge from current vertex (or current tree) to the next vertex (or next tree)
+        Output:
+            None
+
+        Time Complexity:
+            Best case time complexity: O(1)
+            Best case analysis: The time complexity will be O(1) as the function only contain initialization of attributes for the edge (or roads).
+
+        Space complexity: 
+            Worst case time complexity: O(1)
+            Worst case analysis: The space complexity will be O(1) as the function only contain initialization of attributes for the edge (or road).
+        """
+        # Initialization of the next vertex (or next tree)
+        self.next_vertex = next_vertex # The current vertex (or next tree) will be ending point of the edge (or road)
+
+        # Initialization of the weight (or travel time) from the current vertex (or current tree) to the next vertex (or next tree)
+        self.weight = weight # The weight will show the amount of time needed to travel down the road
+        
+
+class TreeMap:
+    def __init__(self, roads, solulus):
+        """
+        Written By: Kayla Zevanya (32810806)
+
+        Function Description:
+            The function is to initialize the TreeMap class in order to create the entire graph (or forest). The function will create all the necessary elements that is within the Delulu forest which are 
+            the trees (or vertices), the roads (or edges), and the solulus.
+       
+        Approach Description:
+            A more detailed description of the function1 approach will be explained alongside with the code written individually by myself. But, the function takes in roads and solulus as input to identify
+            the amount of trees (or vertices), roads (or edges) and solulus the graph will have and identify the largest tree identifier in order to be able to now the list to be created to build the 
+            forest (or graph). The function approaches the initialization of the graph to have a 2D adjacency list.
+
+        Input:
+            roads: The first input is the roads represented as a tuple that within it contains u,v,w where u represents the starting tree ID, v represents the ending tree ID, and w represents the amount of time 
+            needed to travel down the road from tree-u to tree-v as specified in the assignment specifications.
+            solulus: The second input is the solulus represented as a tuple that within it contains x,y,z where x represents the tree ID where that tree is a Solulu tree in the forest, y represents the amount of time 
+            needed to clay and destroy the Solulu tree, and z represents the tree ID where you will be teleported to if the Solulu tree is destroyed as specified in the assignment specifications.
+           
+        Output:
+             The function will not specifically return anything but instead will create an adjacency list for each vertices (or trees)
+
+        Time Complexity:
+            Best case time complexity: O(|T| + |R|)
+            Best case analysis: The complexity is O(|T| + |R|) because T is the number of trees and R is the number of roads.
+
+        Space complexity: 
+            Worst case time complexity: O(|T| + |R|)
+            Worst case analysis: The complexity is O(|T| + |R|) because within the function will require space to store the vertices (or trees) and the edges (or roads)
+        """
+        # As it is unknown the amount of trees (or vertices) the forest (or graph) could have, I need to first initialize or create a code that determine the largest tree ID to determine the size of the graph
+        # Initialize the max_tree to firstly contain 0
+        max_tree = 0
+
+        # The for loop will iterate through the inputted road tuple to determine the larget tree id for the amount of roads (or edges) the graph contain from the inputted graph 
+        for u, v, _ in roads:
+
+            # Redefining or re-initialize the value of max_tree to now contain the largest tree id for the value of edges (or roads) it can have
+            max_tree = max(max_tree, u, v)
+        
+        # The for loop will iterate through the inputted solulus to determine the largest tree id from the inputted graph
+        for x, _, z in solulus:
+
+            # Redefining or re-initialize the value of max_tree to now contain the largest value of edges (or roads) it can have
+            max_tree = max(max_tree, x, z)
+
+        # Initialize the vertices as the trees in the forest which is represented as a graph
+        self.vertices = [Vertex() for _ in range(max_tree + 1)]
+
+        # List of possible Solulu tree within the forest
+        self.solulus = [None] * (max_tree + 1)
+
+        # The for loop will iterate through the roads tuple to initialize the edge elements in the graph
+        for u, v, w in roads:
+            
+            # Initializing the road from current tree (vertex u) and appending the information of an edge with v to show next tree (vertex v) with a travel time (w)
+            self.vertices[u].edges.append(Edge(v, w)) # Each vertex (or tree) that connects to another vertex (or tree) will have a travel time
+
+        # The for loop will iterate through the solulus tuple to initialize the solulus with elements within the graph
+        for x, y, z in solulus:
+
+            # Initializing the solulus from current solulus tree (vertex x) and appending the information of time to destroy the current solulus tree (y) and travel to the next solulus tree (z)
+            self.solulus[x] = (y, z)  # Each solulus tree will have a destruction time and the next solulus tree that will be teleported
+    
+    def escape(self, start, exits):
+        """
+        Written By: Kayla Zevanya (32810806)
+
+        Function Description:
+            The escape function is to find the optimal and shortest travel time to reach the exit from the start while adhering to the requirements of one solulu need to be destroyed. After a solulu is 
+            destroyed, a new location will be teleported and from the new tree, need to find the shortest travel time to the exit. The escape function take into account the overall route and find the 
+            shortest travel time in overall. 
+
+        Approach Description:
+            A more detailed description of the function1 approach will be explained alongside with the code written individually by myself. The function approaches by creating a list called result that
+            can store tuples that can store the total_time, current_vertex, and route. The function will first push or add a values of tuples within the result list which later on as long as the result list
+            is still empty, the function will try to find the optimal time to visit the adjacent vertices to the current vertex and push the shortest travel time out of all the connecting vertices to the current
+            vertex which later on need to check if the current vertex visited is a solulu or not, as again in the assignment specification mentioned that one solulu need to be at least visited. If the current vertex
+            is a solulu, the assignment specification also mentions that it needs to be destroyed and it will take time to destroy the solulu tree and after the solulu tree is destroyed, will be teleported to a new vertex.
+            The function takes into account the time taken to destroy the solulu as well to find the best and lowest optimal travel time to reach the exit.
+        
+
+        Input:
+            start: The first input is the start in the form of an integer. The start is where the starting point is.
+            exits: The second input is the exits in the form of a list of integers. The exits are where the exits to escape the forest is located.
+           
+        Output:
+            The output will return (total_time, route) which is a tuple that shows the total time it takes to escape from the starting point and traveling through the shortest route to 
+            get to the exit after destroying at least one solulu tree and get teleported
+            
+
+        Time Complexity:
+            Best case time complexity: O(|R| log |T|) where R is the number of roads and T is the number of trees.
+            Best case analysis: The complexity is O(|R| log |T|) because R is the number of Roads and T is the number of trees
+
+        Space complexity: 
+            Worst case time complexity: O(|R| log |T|) where R is the number of roads and T is the number of trees.
+            Worst case analysis: The complexity is O(|R| log |T|) because R is the number of Roads and T is the number of trees and need to store the visited Trees and store the priority queue
+        """
+        # Importing the heapq for priority queue 
+        import heapq
+
+        # Define total time to be the minimum travel time from start to exit
+        total_time = 0
+
+        # Determining if there is already a solulus visited or not as the assignment specification stated that from start to exit need to at least encounter 1 solulu tree
+        solulus_visited = False # Initializing the solulus_visited to be False first
+
+        # Create a list to hold tuples of different variables (total_time, current_vertex, route) 
+        result = []
+
+        # Adding (or pushing) values of tuples within the result list
+        heapq.heappush(result, (total_time, start, [start], solulus_visited)) # The result list will contain the elements of (total_time, start, [start], solulus_visited)
+
+        # Initializing an array to check the optimal time to visit each tree in the forest
+        vertex_visited = [[float('inf'), float('inf')] for _ in range(len(self.vertices))] # The array will contain optimal time of visiting all tree in the forest for both visiting and not visiting a solulus tree
+
+        # The while loop will iterate the entire list of result
+        while result:
+
+            # Pop or remove the vertex that takes the least time to travel to
+            total_time, current_vertex, route, solulus_visited = heapq.heappop(result)
+
+            # The for loop will iterate through all the adjacent vertices that the current vertex is connected to
+            for edge in self.vertices[current_vertex].edges: # The for loop will iterate through all the trees that has a road that connects to other trees with the current tree
+                
+                # The possible vertices that has edges connecting from current to next vertex
+                adjacent_vertex = edge.next_vertex # The possible trees that exist a road connecting from the current tree
+
+                # The weight of the edge from current to each adjacent vertex 
+                weight = edge.weight  # The travel time from current tree to each adjacent trees
+
+                # The new total time 
+                new_total_time = total_time + weight  # The new total travel time
+
+                # Increasing the connectivity of the route with each adjacnet vertices
+                new_route = route + [adjacent_vertex]  # Extending the current route with the adjacent trees
+
+                # Pushing or adding the new findings into the result list
+                heapq.heappush(result, (new_total_time, adjacent_vertex, new_route, solulus_visited)) # The result list will contain new elements of (new_total_time, adjacent_vertex, new_route, solulus_visited)
+
+            # Check if the current vertex is a Solulu tree and if it hasn't been destroyed yet.
+            if self.solulus[current_vertex] and not solulus_visited:
+
+                # Get the time required to destroy the Solulu tree and the destination if it teleports the bear.
+                destroy_time, teleport_vertex = self.solulus[current_vertex]
+
+                # Calculate the total time including the time to destroy the Solulu tree.
+                total_time_after_destroy = total_time + destroy_time
+
+                # Determining the new route after getting teleported to another vertex 
+                new_route = route + ([teleport_vertex] if teleport_vertex != current_vertex else []) # If the current tree is not the teleported tree after the solulus is destroyed, add it into the new route
+
+                # Pushing or adding the new new findings into the result list
+                heapq.heappush(result, (total_time_after_destroy, teleport_vertex, new_route, True)) # The result list will contain new elements of (total_time_after_destroy, teleport_vertex, new_route, solulus_visited)
+
+            # If the current total time is lesser, then change the total time to the new total time to have lesser total time
+            if total_time <= vertex_visited[current_vertex][solulus_visited]:
+
+                # Replace the total time with the new total time that is lower 
+               vertex_visited[current_vertex][solulus_visited] = total_time 
+
+             # Check if the current_vertex is the exit and has the overall route visited the solulu at least once
+            if current_vertex in exits and solulus_visited:
+
+                # If the current vertex is the exit and solulu has been visited at least once, return (total_time, route)
+                return (total_time, route) # Return the total travel time and route as the result to exit the forest
