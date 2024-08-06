@@ -10,6 +10,8 @@ In FITWORLD, adventurers can fuse FITMONs, magical creatures with varying cutene
 
 
 
+
+
 Question 2 brief description - Escape from Delulu Forest
 
 You are a bear trapped in Delulu Forest, seeking the fastest way to escape. The forest is represented as a graph of trees connected by roads, with specific trees serving as start points and exits. Some trees, called Solulu trees, must be destroyed to break the forest's seal, enabling escape. The destruction of Solulu trees may also teleport you to another tree.
